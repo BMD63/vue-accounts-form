@@ -103,122 +103,126 @@ function onChangeType() {
 </script>
 
 <template>
-  <li class="grid grid-cols-[auto_1fr] gap-3 items-start p-2.5 border border-gray-200 rounded-lg bg-white">
-    <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
-      <div class="flex flex-col gap-1.5 min-w-0">
-        <input
-          :id="'labels-' + account.id"
-          v-model="labelsInput"
-          type="text"
-          maxlength="300"
-          placeholder="Введите метку или несколько"
-          aria-label="Метки"
-          class="w-full h-9 min-w-0"
-          @blur="onBlurLabels"
-        />
-      </div>
-
-      <div class="flex flex-col gap-1.5 min-w-0">
-        <select
-          :id="'type-' + account.id"
-          v-model="typeValue"
-          aria-label="Тип записи"
-          class="w-full h-9 min-w-0"
-          @change="onChangeType"
-        >
-          <option value="LOCAL">Локальная</option>
-          <option value="LDAP">LDAP</option>
-        </select>
-      </div>
-    </div>
-
-    <div 
-      class="grid gap-3 min-w-0"
-      :class="typeValue !== 'LOCAL' 
-        ? 'grid-cols-[1fr_var(--col-action)]' 
-        : 'grid-cols-[1fr_1fr_var(--col-action)]'"
-    >
-      <div class="flex flex-col gap-1.5 min-w-0">
-        <input
-          ref="loginEl"
-          :id="'login-' + account.id"
-          v-model="login"
-          type="text"
-          maxlength="100"
-          placeholder="Введите логин"
-          aria-label="Логин"
-          class="w-full h-9 min-w-0"
-          :class="{ 'is-error': loginError }"
-          @blur="onBlurLogin"
-        />
-        <small 
-          v-if="loginError" 
-          class="mt-0.5 leading-tight text-red-700" 
-          :id="loginHelpId"
-        >
-          Обязательное поле (1–100 символов)
-        </small>
-      </div>
-
-      <div v-if="typeValue === 'LOCAL'" class="flex flex-col gap-1.5 min-w-0">
-        <div class="relative min-w-0">
+  <li class="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/30">
+    <div class="grid grid-cols-[auto_1fr] gap-3 items-start p-2.5">
+      <!-- Левые колонки (Метки и Тип) -->
+      <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
+        <div class="flex flex-col gap-1.5 min-w-0">
           <input
-            :id="'pwd-' + account.id"
-            v-model="password"
-            :type="pwdInputType"
-            maxlength="100"
-            placeholder="Введите пароль"
-            aria-label="Пароль"
-            class="w-full h-9 pr-9"
-            :class="{ 'is-error': passwordError }"
-            :aria-invalid="passwordError ? 'true' : 'false'"
-            :aria-describedby="passwordError ? passwordHelpId : undefined"
-            @blur="onBlurPassword"
+            :id="'labels-' + account.id"
+            v-model="labelsInput"
+            type="text"
+            maxlength="300"
+            placeholder="Введите метку или несколько"
+            aria-label="Метки"
+            class="w-full h-9 min-w-0 border border-gray-300 rounded px-2 py-1.5"
+            @blur="onBlurLabels"
           />
-          <button
-            class="absolute top-1/2 right-2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center border-0 bg-transparent p-0 cursor-pointer text-gray-500 opacity-85 hover:opacity-100 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
-            type="button"
-            :title="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
-            :aria-label="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
-            :aria-pressed="showPwd ? 'true' : 'false'"
-            @click="togglePwd"
+        </div>
+
+        <div class="flex flex-col gap-1.5 min-w-0">
+          <select
+            :id="'type-' + account.id"
+            v-model="typeValue"
+            aria-label="Тип записи"
+            class="w-full h-9 min-w-0 border border-gray-300 rounded px-2 py-1.5 bg-white"
+            @change="onChangeType"
           >
-            <svg v-if="!showPwd" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.9 1.3-4.7 6-10.7 6S2.5 12.3 1.3 11C2.5 9.1 6.5 5 12 5Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            <svg v-else viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.6.9-2.6 3.3-5.7 4.9M6.9 7.1C4.1 8.6 2.5 10.6 1.3 11 2.5 12.9 6.5 17 12 17c1 0 2-.1 2.9-.3" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <option value="LOCAL">Локальная</option>
+            <option value="LDAP">LDAP</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Правые колонки (Логин, Пароль, Кнопка удаления) -->
+      <div 
+        class="grid gap-3 min-w-0"
+        :class="typeValue !== 'LOCAL' 
+          ? 'grid-cols-[1fr_var(--col-action)]' 
+          : 'grid-cols-[1fr_1fr_var(--col-action)]'"
+      >
+        <div class="flex flex-col gap-1.5 min-w-0">
+          <input
+            ref="loginEl"
+            :id="'login-' + account.id"
+            v-model="login"
+            type="text"
+            maxlength="100"
+            placeholder="Введите логин"
+            aria-label="Логин"
+            class="w-full h-9 min-w-0 border border-gray-300 rounded px-2 py-1.5"
+            :class="{ 'is-error border-red-500': loginError }"
+            @blur="onBlurLogin"
+          />
+          <small 
+            v-if="loginError" 
+            class="mt-0.5 leading-tight text-red-700 text-xs" 
+            :id="loginHelpId"
+          >
+            Обязательное поле (1–100 символов)
+          </small>
+        </div>
+
+        <div v-if="typeValue === 'LOCAL'" class="flex flex-col gap-1.5 min-w-0">
+          <div class="relative min-w-0">
+            <input
+              :id="'pwd-' + account.id"
+              v-model="password"
+              :type="pwdInputType"
+              maxlength="100"
+              placeholder="Введите пароль"
+              aria-label="Пароль"
+              class="w-full h-9 pr-9 border border-gray-300 rounded px-2 py-1.5"
+              :class="{ 'is-error border-red-500': passwordError }"
+              :aria-invalid="passwordError ? 'true' : 'false'"
+              :aria-describedby="passwordError ? passwordHelpId : undefined"
+              @blur="onBlurPassword"
+            />
+            <button
+              class="absolute top-1/2 right-2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center border-0 bg-transparent p-0 cursor-pointer text-gray-500 opacity-85 hover:opacity-100 hover:text-gray-700"
+              type="button"
+              :title="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
+              :aria-label="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
+              :aria-pressed="showPwd ? 'true' : 'false'"
+              @click="togglePwd"
+            >
+              <svg v-if="!showPwd" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.9 1.3-4.7 6-10.7 6S2.5 12.3 1.3 11C2.5 9.1 6.5 5 12 5Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <svg v-else viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.6.9-2.6 3.3-5.7 4.9M6.9 7.1C4.1 8.6 2.5 10.6 1.3 11 2.5 12.9 6.5 17 12 17c1 0 2-.1 2.9-.3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </button>
+          </div>
+
+          <small 
+            v-if="passwordError" 
+            class="mt-0.5 leading-tight text-red-700 text-xs" 
+            :id="passwordHelpId"
+          >
+            Обязательное поле (1–100 символов)
+          </small>
+        </div>
+
+        <div class="flex items-start justify-end">
+          <button
+            class="w-7 h-7 inline-flex items-center justify-center bg-transparent border-0 p-0 cursor-pointer text-gray-500 opacity-85 leading-none hover:opacity-100 hover:text-red-700"
+            type="button"
+            title="Удалить"
+            aria-label="Удалить"
+            @click="$emit('remove')"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M3 6h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 6V4.8c0-.44.36-.8.8-.8h6.4c.44 0 .8.36.8.8V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="5" y="6" width="14" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 10v6M14 10v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </button>
         </div>
-
-        <small 
-          v-if="passwordError" 
-          class="mt-0.5 leading-tight text-red-700" 
-          :id="passwordHelpId"
-        >
-          Обязательное поле (1–100 символов)
-        </small>
-      </div>
-
-      <div class="flex items-start justify-end">
-        <button
-          class="w-7 h-7 inline-flex items-center justify-center bg-transparent border-0 p-0 cursor-pointer text-gray-500 opacity-85 leading-none hover:opacity-100 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
-          type="button"
-          title="Удалить"
-          aria-label="Удалить"
-          @click="$emit('remove')"
-        >
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <path d="M3 6h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M8 6V4.8c0-.44.36-.8.8-.8h6.4c.44 0 .8.36.8.8V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="5" y="6" width="14" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M10 10v6M14 10v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
       </div>
     </div>
   </li>

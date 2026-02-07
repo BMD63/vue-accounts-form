@@ -88,34 +88,40 @@ function onAdd() {
       Список пуст. Нажмите «+», чтобы добавить запись.
     </div>
 
-    <div v-else class="grid grid-cols-[auto_1fr] gap-3 items-center px-2.5 pt-1.5 pb-2 text-gray-600 text-xs">
-      <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
-        <span class="min-w-0">Метки</span>
-        <span class="min-w-0">Тип записи</span>
+    <!-- Единая таблица -->
+    <div v-else class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+      <!-- Заголовки таблицы -->
+      <div class="px-2.5 pt-3 pb-2 text-gray-600 text-xs border-b border-gray-100 bg-gray-50/50">
+        <div class="grid grid-cols-[auto_1fr] gap-3 items-center">
+          <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
+            <span class="min-w-0 font-medium text-gray-900">Метки</span>
+            <span class="min-w-0 font-medium text-gray-900">Тип записи</span>
+          </div>
+          <div 
+            class="grid gap-3"
+            :class="showPasswordCol 
+              ? 'grid-cols-[1fr_1fr_var(--col-action)]' 
+              : 'grid-cols-[1fr_var(--col-action)]'"
+          >
+            <span class="min-w-0 font-medium text-gray-900">Логин</span>
+            <span v-if="showPasswordCol" class="min-w-0 font-medium text-gray-900">Пароль</span>
+            <span class="w-(--col-action)"></span>
+          </div>
+        </div>
       </div>
 
-      <div 
-        class="grid gap-3"
-        :class="showPasswordCol 
-          ? 'grid-cols-[1fr_1fr_var(--col-action)]' 
-          : 'grid-cols-[1fr_var(--col-action)]'"
-      >
-        <span class="min-w-0">Логин</span>
-        <span v-if="showPasswordCol" class="min-w-0">Пароль</span>
-        <span class="w-(--col-action)"></span>
-      </div>
+      <!-- Строки таблицы -->
+      <ul class="list-none p-0 m-0">
+        <AccountRow
+          v-for="a in store.accounts"
+          :key="a.id"
+          :account="a"
+          :focus-id="focusId"
+          :validate-id="validateId"
+          :validate-tick="validateTick"
+          @remove="store.remove(a.id)"
+        />
+      </ul>
     </div>
-
-    <ul v-if="store.accounts.length" class="list-none p-0 m-0 grid gap-2">
-      <AccountRow
-        v-for="a in store.accounts"
-        :key="a.id"
-        :account="a"
-        :focus-id="focusId"
-        :validate-id="validateId"
-        :validate-tick="validateTick"
-        @remove="store.remove(a.id)"
-      />
-    </ul>
   </section>
 </template>
