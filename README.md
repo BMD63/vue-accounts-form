@@ -2,10 +2,12 @@
 
 Веб-приложение для управления учётными записями с поддержкой LDAP и локальной аутентификации.
 
-![Vue]https://img.shields.io/badge/Vue-3-42b883?logo=vuedotjs
-![Typescript]https://img.shields.io/badge/TypeScript-5.0-3178c6?logo=typescript
-![Pinia]https://img.shields.io/badge/Pinia-2.0-ffd859?logo=vue.js
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css)
+![Vue](https://img.shields.io/badge/Vue-3.5-42b883?logo=vue.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178c6?logo=typescript&logoColor=white)
+![Pinia](https://img.shields.io/badge/Pinia-3.0-ffd859?logo=vue.js&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1-38b2ac?logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white)
+
 
 ## 📦 Установка и запуск
 
