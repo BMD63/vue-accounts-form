@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Темный фон -->
+  <rect width="200" height="200" fill="#0a0e27" rx="20"/>
+  
+  <!-- Неоновое свечение фона -->
+  <circle cx="100" cy="100" r="80" fill="url(#neonGradient)" opacity="0.1" filter="url(#glow)"/>
+  
+  <!-- Текст <Ch/> -->
+  <text x="100" y="120" font-family="'Courier New', monospace" font-size="56" font-weight="bold" 
+        fill="url(#neonGradient)" text-anchor="middle" filter="url(#glow)">
+    &lt;Ch/&gt;
+  </text>
+  
+  <!-- Дополнительное свечение -->
+  <text x="100" y="120" font-family="'Courier New', monospace" font-size="56" font-weight="bold" 
+        fill="#00f5ff" text-anchor="middle" opacity="0.5" filter="url(#glow)">
+    &lt;Ch/&gt;
+  </text>
+</svg>
