@@ -47,7 +47,7 @@ function onAdd() {
     <header class="flex items-center gap-2.5 mb-2">
       <h2 class="text-xl font-semibold">Учётные записи</h2>
       <button
-        class="inline-flex items-center justify-center w-9 h-9 border border-gray-300 bg-white rounded-lg hover:bg-gray-50 transition-colors cursor-pointer p-0"
+        class="inline-flex items-center justify-center w-9 h-9 p-0 border border-gray-300 bg-white rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
         @click="onAdd"
         type="button"
         title="Добавить учётную запись"

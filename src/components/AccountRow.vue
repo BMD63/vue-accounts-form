@@ -179,24 +179,42 @@ function onChangeType() {
               @blur="onBlurPassword"
             />
             <button
-              class="absolute top-1/2 right-2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center border-0 bg-transparent p-0 cursor-pointer text-gray-500 opacity-85 hover:opacity-100 hover:text-gray-700"
-              type="button"
-              :title="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
-              :aria-label="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
-              :aria-pressed="showPwd ? 'true' : 'false'"
-              @click="togglePwd"
+                class="eye-btn absolute top-1/2 right-2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center border-0 bg-transparent p-0 cursor-pointer opacity-85 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
+                type="button"
+                :title="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
+                :aria-label="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
+                :aria-pressed="showPwd ? 'true' : 'false'"
+                @click="togglePwd"
+                >
+                <svg v-if="!showPwd" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.9 1.3-4.7 6-10.7 6S2.5 12.3 1.3 11C2.5 9.1 6.5 5 12 5Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <svg v-else viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.6.9-2.6 3.3-5.7 4.9M6.9 7.1C4.1 8.6 2.5 10.6 1.3 11 2.5 12.9 6.5 17 12 17c1 0 2-.1 2.9-.3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </button>
+          </div>
+          <button
+            class="eye-btn absolute top-1/2 right-2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center border-0 bg-transparent p-0 cursor-pointer opacity-85 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
+            type="button"
+            :title="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
+            :aria-label="showPwd ? 'Скрыть пароль' : 'Показать пароль'"
+            :aria-pressed="showPwd ? 'true' : 'false'"
+            @click="togglePwd"
             >
-              <svg v-if="!showPwd" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <svg v-if="!showPwd" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.9 1.3-4.7 6-10.7 6S2.5 12.3 1.3 11C2.5 9.1 6.5 5 12 5Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
                 <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-              <svg v-else viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            </svg>
+            <svg v-else viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.5"/>
                 <path d="M12 5c5.5 0 9.5 4.1 10.7 6-.6.9-2.6 3.3-5.7 4.9M6.9 7.1C4.1 8.6 2.5 10.6 1.3 11 2.5 12.9 6.5 17 12 17c1 0 2-.1 2.9-.3" fill="none" stroke="currentColor" stroke-width="1.5"/>
                 <circle cx="12" cy="11" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
+            </svg>
             </button>
-          </div>
 
           <small 
             v-if="passwordError" 
@@ -209,19 +227,19 @@ function onChangeType() {
 
         <div class="flex items-start justify-end">
           <button
-            class="w-7 h-7 inline-flex items-center justify-center bg-transparent border-0 p-0 cursor-pointer text-gray-500 opacity-85 leading-none hover:opacity-100 hover:text-red-700"
+            class="trash-btn w-7 h-7 inline-flex items-center justify-center bg-transparent border-0 p-0 cursor-pointer opacity-85 leading-none hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
             type="button"
             title="Удалить"
             aria-label="Удалить"
             @click="$emit('remove')"
-          >
+            >
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path d="M3 6h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M8 6V4.8c0-.44.36-.8.8-.8h6.4c.44 0 .8.36.8.8V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <rect x="5" y="6" width="14" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M10 10v6M14 10v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M3 6h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M8 6V4.8c0-.44.36-.8.8-.8h6.4c.44 0 .8.36.8.8V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="5" y="6" width="14" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M10 10v6M14 10v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-          </button>
+            </button>
         </div>
       </div>
     </div>

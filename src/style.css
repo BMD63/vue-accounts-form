@@ -4,12 +4,6 @@
   --col-label: 200px;
   --col-type: 140px;
   --col-action: 40px;
-  --border: #e5e7eb;
-  --muted: #6b7280;
-  --brand: #646cff;
-  --danger: #dc2626;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --radius: 8px;
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,13 +13,10 @@
 
 body {
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #242424;
-  color: rgba(255, 255, 255, 0.87);
+  color: #213547;
+  background-color: #ffffff;
 }
 
 a {
@@ -35,7 +26,7 @@ a {
 }
 
 a:hover {
-  color: #535bf2;
+  color: #747bff;
 }
 
 h1 {
@@ -50,13 +41,27 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 button:hover {
   border-color: #646cff;
+}
+
+/* Отключаем общие стили кнопок для иконочных кнопок */
+.trash-btn,
+.eye-btn {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+}
+
+.trash-btn:hover,
+.eye-btn:hover {
+  border-color: transparent;
+  background-color: transparent;
 }
 
 button:focus,
@@ -78,7 +83,8 @@ select {
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   font-family: inherit;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: all 0.15s;
+  background-color: white;
 }
 
 input[type="text"]:focus,
@@ -103,17 +109,67 @@ select {
   cursor: pointer;
 }
 
-@media (prefers-color-scheme: light) {
+/* Кнопка удаления - светлая тема */
+.trash-btn {
+  color: #dc2626;
+}
+
+.trash-btn:hover {
+  color: #991b1b;
+}
+
+/* Кнопка показа пароля - светлая тема */
+.eye-btn {
+  color: #777;
+}
+
+.eye-btn:hover {
+  color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
   body {
-    color: #213547;
-    background-color: #ffffff;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
   }
   
   a:hover {
-    color: #747bff;
+    color: #535bf2;
   }
   
   button {
-    background-color: #f9f9f9;
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  select {
+    background-color: #1a1a1a;
+    border-color: #404040;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  /* Кнопка добавления записи */
+  header button span {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  /* Кнопка удаления - темная тема */
+  .trash-btn {
+    color: #ef4444;
+  }
+  
+  .trash-btn:hover {
+    color: #dc2626;
+  }
+
+  /* Кнопка показа пароля - темная тема */
+  .eye-btn {
+    color: #a0a0a0;
+  }
+
+  .eye-btn:hover {
+    color: #d1d1d1;
   }
 }
