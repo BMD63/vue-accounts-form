@@ -2,6 +2,7 @@
 import { onMounted, computed, ref } from 'vue';
 import { useAccountsStore } from '../stores/accounts';
 import AccountRow from './AccountRow.vue';
+import ThemeToggle from './ThemeToggle.vue'
 
 const store = useAccountsStore();
 
@@ -43,18 +44,22 @@ function onAdd() {
 </script>
 
 <template>
+  
   <section class="accounts-form">
-    <header class="flex items-center gap-2.5 mb-2">
-      <h2 class="text-xl font-semibold">Учётные записи</h2>
-      <button
-        class="inline-flex items-center justify-center w-9 h-9 p-0 border border-gray-300 bg-white rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
-        @click="onAdd"
-        type="button"
-        title="Добавить учётную запись"
-        aria-label="Добавить учётную запись"
-      >
-        <span class="text-[22px] leading-none text-gray-900" aria-hidden="true">+</span>
-      </button>
+    <header class="flex items-center justify-between gap-2.5 mb-2">
+      <div class="flex items-center gap-2.5">
+        <h2 class="text-xl font-semibold">Учётные записи</h2>
+        <button
+          class="inline-flex items-center justify-center w-9 h-9 p-0 border border-gray-300 bg-white rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
+          @click="onAdd"
+          type="button"
+          title="Добавить учётную запись"
+          aria-label="Добавить учётную запись"
+        >
+          <span class="text-[22px] leading-none text-gray-900" aria-hidden="true">+</span>
+        </button>
+      </div>
+      <ThemeToggle />
     </header>
 
     <p class="flex items-center gap-2 text-gray-600 my-0 mb-2" role="note">
