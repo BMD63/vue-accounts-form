@@ -94,9 +94,9 @@ function onAdd() {
     </div>
 
     <!-- Единая таблица -->
-    <div v-else class="border border-gray-200 rounded-lg overflow-hidden bg-white">
+    <div v-else class="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
       <!-- Заголовки таблицы -->
-      <div class="px-2.5 pt-3 pb-2 text-gray-600 text-xs border-b border-gray-100 bg-gray-50/50">
+     <div class="px-2.5 pt-3 pb-2 text-gray-600 text-xs border-b border-gray-100 bg-gray-100">
         <div class="grid grid-cols-[auto_1fr] gap-3 items-center">
           <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
             <span class="min-w-0 font-medium text-gray-900">Метки</span>
