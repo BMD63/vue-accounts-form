@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --col-label: 200px;
+  --col-label: 500px;
   --col-type: 140px;
   --col-action: 28px;
 }
