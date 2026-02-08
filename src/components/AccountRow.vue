@@ -10,9 +10,25 @@ const props = defineProps<{
   validateId?: string | null;
   validateTick?: number;
 }>();
-defineEmits<{ (e: 'remove'): void }>();
+const emit = defineEmits<{ (e: 'remove'): void }>();
 
 const store = useAccountsStore();
+
+// Модальное окно подтверждения удаления
+const showDeleteModal = ref(false);
+
+function openDeleteModal() {
+  showDeleteModal.value = true;
+}
+
+function closeDeleteModal() {
+  showDeleteModal.value = false;
+}
+
+function confirmDelete() {
+  emit('remove');
+  closeDeleteModal();
+}
 
 const showPwd = ref(false);
 const pwdInputType = computed(() => (showPwd.value ? 'text' : 'password'));
@@ -210,9 +226,9 @@ function onChangeType() {
           <button
             class="trash-btn w-7 h-7 inline-flex items-center justify-center bg-transparent border-0 p-0 cursor-pointer opacity-85 leading-none hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
             type="button"
-            title="Удалить"
-            aria-label="Удалить"
-            @click="$emit('remove')"
+            title="Удалить запись"
+            aria-label="Удалить запись"
+            @click="openDeleteModal"
             >
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path d="M3 6h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
@@ -224,5 +240,60 @@ function onChangeType() {
         </div>
       </div>
     </div>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div v-if="showDeleteModal" class="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div class="modal-content bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div class="p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Подтверждение удаления</h3>
+          <p class="text-gray-700 mb-6">
+            Вы действительно хотите удалить запись?
+            <span v-if="account.labels.length > 0" class="font-medium">(метки: {{ account.labels.join(', ') }})</span>
+          </p>
+          <div class="flex justify-end gap-3">
+            <button
+              type="button"
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              @click="closeDeleteModal"
+            >
+              Отмена
+            </button>
+            <button
+              type="button"
+              class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              @click="confirmDelete"
+            >
+              Удалить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </li>
 </template>
+
+<style scoped>
+.modal-overlay {
+  animation: fadeIn 0.15s ease-out;
+}
+
+.modal-content {
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
