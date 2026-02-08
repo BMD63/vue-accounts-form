@@ -1,33 +1,41 @@
+@import "tailwindcss";
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  --col-label: 200px;
+  --col-type: 140px;
+  --col-action: 40px;
+  --border: #e5e7eb;
+  --muted: #6b7280;
+  --brand: #646cff;
+  --danger: #dc2626;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --radius: 8px;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #535bf2;
 }
 
 h1 {
@@ -46,16 +54,14 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
 }
 
 #app {
@@ -65,14 +71,48 @@ button:focus-visible {
   text-align: center;
 }
 
+input[type="text"],
+input[type="password"],
+select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+input.is-error {
+  border-color: #ef4444;
+}
+
+input.is-error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+select {
+  background-color: white;
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  body {
     color: #213547;
     background-color: #ffffff;
   }
+  
   a:hover {
     color: #747bff;
   }
+  
   button {
     background-color: #f9f9f9;
   }
