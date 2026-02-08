@@ -46,25 +46,27 @@ function onAdd() {
 <template>
   
   <section class="accounts-form">
-    <header class="flex items-center justify-between gap-2.5 mb-2">
-      <div class="flex items-center gap-2.5">
-        <h2 class="text-xl font-semibold">Учётные записи</h2>
+    <header class="glass-header flex items-center justify-between gap-2.5 mb-6 p-4 rounded-2xl" >
+      <div class="flex items-center gap-3">
+        <h2 class="text-2xl font-semibold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Учётные записи
+        </h2>
         <button
-          class="inline-flex items-center justify-center w-9 h-9 p-0 border border-gray-300 bg-white rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
+          class="glass-button inline-flex items-center justify-center w-10 h-10 p-0 rounded-xl cursor-pointer transition-all duration-300 hover:scale-105"
           @click="onAdd"
           type="button"
           title="Добавить учётную запись"
           aria-label="Добавить учётную запись"
         >
-          <span class="text-[22px] leading-none text-gray-900" aria-hidden="true">+</span>
+          <span class="text-[24px] leading-none gradient-text" aria-hidden="true">+</span>
         </button>
       </div>
       <ThemeToggle />
     </header>
 
-    <p class="flex items-center gap-2 text-gray-600 my-0 mb-2" role="note">
+    <p class="glass-note flex items-center gap-2.5 my-0 mb-4 p-3 rounded-xl" role="note">
       <span 
-        class="inline-flex w-5.5 h-5.5 items-center justify-center border border-gray-200 rounded-full bg-white shadow-sm text-gray-700"
+        class="icon-bubble inline-flex w-6 h-6 items-center justify-center rounded-full"
         aria-hidden="true"
       >
         <svg viewBox="0 0 24 24" width="16" height="16">
@@ -73,15 +75,17 @@ function onAdd() {
           <circle cx="12" cy="16.5" r="1" fill="currentColor"/>
         </svg>
       </span>
-      Для указания нескольких меток одной пары логин/пароль используйте разделитель ;
+      <span class="text-sm">
+        Для указания нескольких меток одной пары логин/пароль используйте разделитель ;
+      </span>
     </p>
 
     <div
-      class="relative my-2 mt-2 px-2.5 py-2 rounded-lg bg-red-50/80 border border-red-200 text-red-700 transition-all duration-150 ease-in-out"
+      class="glass-warning relative my-2 mt-2 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out"
       :class="[
         warnVisible 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 -translate-y-1 pointer-events-none'
+          ? 'opacity-100 translate-y-0 scale-100' 
+          : 'opacity-0 -translate-y-2 scale-95 pointer-events-none'
       ]"
       role="status"
       aria-live="polite"
@@ -89,18 +93,18 @@ function onAdd() {
       {{ warnText }}
     </div>
 
-    <div v-if="store.accounts.length === 0" class="opacity-70 my-2 mb-4">
+    <div v-if="store.accounts.length === 0" class="glass-empty opacity-70 my-4 mb-6 p-6 rounded-xl text-center">
       Список пуст. Нажмите «+», чтобы добавить запись.
     </div>
 
     <!-- Единая таблица -->
-    <div v-else class="border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+    <div v-else class="glass-table rounded-2xl overflow-hidden">
       <!-- Заголовки таблицы -->
-     <div class="px-2.5 pt-3 pb-2 text-gray-600 text-xs border-b border-gray-100 bg-gray-100">
+      <div class="glass-table-header px-4 pt-4 pb-3 text-xs font-medium">
         <div class="grid grid-cols-[auto_1fr] gap-3 items-center">
           <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
-            <span class="min-w-0 font-medium text-gray-900">Метки</span>
-            <span class="min-w-0 font-medium text-gray-900">Тип записи</span>
+            <span class="min-w-0">Метки</span>
+            <span class="min-w-0">Тип записи</span>
           </div>
           <div 
             class="grid gap-3"
@@ -108,8 +112,8 @@ function onAdd() {
               ? 'grid-cols-[1fr_1fr_var(--col-action)]' 
               : 'grid-cols-[1fr_var(--col-action)]'"
           >
-            <span class="min-w-0 font-medium text-gray-900">Логин</span>
-            <span v-if="showPasswordCol" class="min-w-0 font-medium text-gray-900">Пароль</span>
+            <span class="min-w-0">Логин</span>
+            <span v-if="showPasswordCol" class="min-w-0">Пароль</span>
             <span class="w-(--col-action)"></span>
           </div>
         </div>
@@ -130,3 +134,127 @@ function onAdd() {
     </div>
   </section>
 </template>
+
+<style scoped >
+.glass-header {
+  background: rgba(249, 250, 251, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.glass-button {
+  background: rgba(249, 250, 251, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-note {
+  background: rgba(59, 130, 246, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #1e40af;
+}
+
+.icon-bubble {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #2563eb;
+}
+
+.glass-warning {
+  background: rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+}
+
+.glass-empty {
+  background: rgba(249, 250, 251, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.6);
+}
+
+.glass-table {
+  background: rgba(249, 250, 251, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.glass-table-header {
+  background: rgba(243, 244, 246, 0.8);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  color: #374151;
+}
+
+/* Темная тема */
+:global(.dark) :deep(.glass-header) {
+  background: rgba(55, 55, 55, 0.4) !important;
+  border: 1px solid rgba(80, 80, 80, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark) .glass-button {
+  background: rgba(50, 50, 50, 0.6);
+  border: 1px solid rgba(80, 80, 80, 0.8);
+}
+
+:global(.dark) .glass-button:hover {
+  background: rgba(60, 60, 60, 0.8);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+:global(.dark) .glass-note {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+}
+
+:global(.dark) .icon-bubble {
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+}
+
+:global(.dark) .glass-warning {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+}
+
+:global(.dark) .glass-empty {
+  background: rgba(38, 38, 38, 0.6);
+  border: 1px solid rgba(64, 64, 64, 0.6);
+}
+
+:global(.dark) .glass-table {
+  background: rgba(38, 38, 38, 0.7);
+  border: 1px solid rgba(64, 64, 64, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+:global(.dark) .glass-table-header {
+  background: rgba(38, 38, 38, 0.8);
+  border-bottom: 1px solid rgba(64, 64, 64, 0.5);
+  color: #d1d5db;
+}
+html.dark .glass-header {
+  background: rgba(55, 55, 55, 0.4) !important;
+  border-color: rgba(80, 80, 80, 0.6) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+</style>

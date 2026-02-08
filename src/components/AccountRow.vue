@@ -121,7 +121,6 @@ function onChangeType() {
 <template>
   <li class="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/30">
     <div class="grid grid-cols-[auto_1fr] gap-3 items-start p-2.5">
-      <!-- Левые колонки (Метки и Тип) -->
       <div class="grid gap-3" style="grid-template-columns: var(--col-label) var(--col-type)">
         <div class="flex flex-col gap-1.5 min-w-0">
           <input
@@ -150,7 +149,6 @@ function onChangeType() {
         </div>
       </div>
 
-      <!-- Правые колонки (Логин, Пароль, Кнопка удаления) -->
       <div 
         class="grid gap-3 min-w-0"
         :class="typeValue !== 'LOCAL' 
@@ -295,5 +293,23 @@ function onChangeType() {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Glass эффект для строк */
+li {
+  background: rgba(249, 250, 251, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+li:hover {
+  background: rgba(243, 244, 246, 0.6);
+}
+
+:global(.dark) li {
+  background: rgba(38, 38, 38, 0.5);
+}
+
+:global(.dark) li:hover {
+  background: rgba(45, 45, 45, 0.6);
 }
 </style>

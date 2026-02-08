@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
+// Работа с темами
 const isDark = ref(false);
 
 function toggleTheme() {
@@ -17,10 +18,9 @@ function updateTheme() {
     localStorage.setItem('theme', 'light');
   }
 }
-
+    
 onMounted(() => {
   const savedTheme = localStorage.getItem('theme');
-  
   if (savedTheme) {
     // Если тема сохранена, используем её
     isDark.value = savedTheme === 'dark';
