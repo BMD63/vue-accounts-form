@@ -55,12 +55,11 @@ button:hover {
 .eye-btn {
   padding: 0;
   background-color: transparent;
-  border: 0;
+  border: 1px solid transparent;
 }
 
 .trash-btn:hover,
 .eye-btn:hover {
-  border-color: transparent;
   background-color: transparent;
 }
 
@@ -117,6 +116,7 @@ select {
 
 .trash-btn:hover {
   color: #991b1b;
+  border-color: #dc2626;
 }
 
 /* Кнопка показа пароля - светлая тема */
@@ -163,6 +163,7 @@ select {
   
   .trash-btn:hover {
     color: #dc2626;
+    border-color: #ef4444;
   }
 
   /* Кнопка показа пароля - темная тема */

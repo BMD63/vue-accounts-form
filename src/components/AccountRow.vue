@@ -224,12 +224,12 @@ function onChangeType() {
 
         <div class="flex items-start justify-end">
           <button
-            class="trash-btn w-7 h-7 inline-flex items-center justify-center bg-transparent border-0 p-0 cursor-pointer opacity-85 leading-none hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md"
+            class="trash-btn w-7 h-7 inline-flex items-center justify-center bg-transparent border border-transparent p-0 cursor-pointer opacity-85 leading-none hover:opacity-100 hover:border-gray-300 focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-blue-400/50 focus-visible:rounded-md transition-colors"
             type="button"
             title="Удалить запись"
             aria-label="Удалить запись"
             @click="openDeleteModal"
-            >
+          >
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path d="M3 6h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
                 <path d="M8 6V4.8c0-.44.36-.8.8-.8h6.4c.44 0 .8.36.8.8V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
